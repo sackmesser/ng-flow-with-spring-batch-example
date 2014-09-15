@@ -1,6 +1,5 @@
 package com.ttp76.spooltaggenerator.service;
 
-import com.ttp76.spooltaggenerator.Application;
 import com.ttp76.spooltaggenerator.domain.Material;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -32,8 +31,8 @@ public class BFileService {
         itemReader.setResource(new InputStreamResource(inputStream));
         DefaultLineMapper<Material> lineMapper = new DefaultLineMapper();
         FixedLengthTokenizer tokenizer = new FixedLengthTokenizer();
-        tokenizer.setNames(Application.MATERIAL_COLUMN_NAMES);
-        tokenizer.setColumns(Application.MATERIAL_COLUMN_RANGES);
+        tokenizer.setNames(Material.COLUMN_NAMES);
+        tokenizer.setColumns(Material.COLUMN_RANGES);
         tokenizer.setStrict(false);
         lineMapper.setLineTokenizer(tokenizer);
         lineMapper.setFieldSetMapper(new FieldSetMapper<Material>() {
@@ -118,9 +117,9 @@ public class BFileService {
         FileSystemResource resource = new FileSystemResource(String.valueOf(new Date().getTime()));
         itemWriter.setResource(resource);
         FormatterLineAggregator<Material> lineAggregator = new FormatterLineAggregator<>();
-        lineAggregator.setFormat(Application.MATERIAL_OUTPUT_LINE_FORMAT);
+        lineAggregator.setFormat(Material.OUTPUT_LINE_FORMAT);
         BeanWrapperFieldExtractor<Material> extractor = new BeanWrapperFieldExtractor<>();
-        extractor.setNames(Application.MATERIAL_COLUMN_NAMES);
+        extractor.setNames(Material.COLUMN_NAMES);
         lineAggregator.setFieldExtractor(extractor);
         itemWriter.setLineAggregator(lineAggregator);
         itemWriter.open(new ExecutionContext());
